@@ -13,6 +13,8 @@
 */
 
 
-Route::post('/teste', function () {
-    return 'API DESAFIO UNICAD';
-})->middleware('auth:api');
+
+Route::middleware(['auth:api'])->namespace('Api')->group(function () {
+
+    Route::get('client/{id}', 'ClientController@find')->name('find.client');
+});

@@ -17,7 +17,6 @@ class CreateAddressesTable extends Migration
             $table->bigIncrements('id');
             $table->string('zip');
             $table->bigInteger('number');
-            $table->string('type')->default('start');
             $table->timestamps();
         });
     }

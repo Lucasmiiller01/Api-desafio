@@ -25,6 +25,7 @@ class CreateDeliveryAddressesTable extends Migration
                 ->references('id')->on('addresses')
                 ->onDelete('cascade');
 
+            $table->string('type')->default('start');
             $table->timestamps();
         });
     }
@@ -36,11 +37,7 @@ class CreateDeliveryAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::table('delivery_addresses', function (Blueprint $table) {
-            $table->dropForeign(['delivery_id']); // drop the foreign key.
-            $table->dropColumn('delivery_id'); // drop the column
-            $table->dropForeign(['address_id']); // drop the foreign key.
-            $table->dropColumn('address_id'); // drop the column
-        });
+        Schema::dropIfExists('delivery_addresses');
+
     }
 }
