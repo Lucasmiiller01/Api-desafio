@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return 'API DESAFIO UNICAD';
 });
+
+Auth::routes();
+
