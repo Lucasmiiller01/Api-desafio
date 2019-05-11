@@ -74,7 +74,7 @@ class DeliveryController extends Controller
      */
     public function save(Request $request)
     {
-        $data = json_decode($request->payload, true);
+        $data = json_decode($request['payload'], true);
 
         if(!$data)
             return response()->json(['errors' => 'format_invalid'], 404);
