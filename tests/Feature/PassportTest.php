@@ -20,8 +20,8 @@ class PassportTest extends TestCase
         $response = $client->request('POST', url('/oauth/token') , [
             'json' => [
                 'grant_type' => 'password',
-                'client_id' => 2,
-                'client_secret' => 'Oj3t1WM3tIduGiTuL9RVxnwEcdi6IPKQPNIfnZu3',
+                'client_id' => env('CLIENT_ID'),
+                'client_secret' => env('CLIENT_SECRET'),
                 "username" => "dev@mail.com",
 	            "password"  => "secret"
 
