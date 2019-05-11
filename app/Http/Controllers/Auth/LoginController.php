@@ -18,6 +18,16 @@ class LoginController extends Controller
     |
     */
 
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        return response()->json(['error' => 'Required Passport'], 403);
+    }
+
     use AuthenticatesUsers;
 
     /**

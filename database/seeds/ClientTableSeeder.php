@@ -14,8 +14,7 @@ class ClientTableSeeder extends Seeder
     {
         for ($i = 1; $i < 4; $i++) {
             DB::table('clients')->insert([
-                'name' => Str::random(10),
-                'delivey_id' => $i,
+                'name' => Str::random(10)
             ]);
         }
     }

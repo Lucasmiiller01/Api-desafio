@@ -15,6 +15,7 @@ class DeliveryTableSeeder extends Seeder
         for ($i = 1 ; $i < 4; $i++) {
             DB::table('deliveries')->insert([
                 'delivery_date' => now(),
+                'client_id' => $i,
             ]);
         }
     }

@@ -16,13 +16,6 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-
-            $table->unsignedBigInteger('delivey_id')->unsigned()->index();
-
-            $table->foreign('delivey_id')
-                ->references('id')->on('deliveries')
-                ->onDelete('cascade');
-
             $table->timestamps();
         });
     }
