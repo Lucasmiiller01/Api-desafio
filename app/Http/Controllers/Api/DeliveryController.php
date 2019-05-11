@@ -74,6 +74,7 @@ class DeliveryController extends Controller
      */
     public function save(Request $request)
     {
+
         $data = json_decode($request['payload'], true);
 
         if(!$data)
@@ -92,20 +93,20 @@ class DeliveryController extends Controller
 
             $client = new Client();
 
-            $client->name = $request['nameClient'];
+            $client->name = $data['nameClient'];
             $client->save();
             $delivery = new $this->delivery;
-            $delivery->delivery_date = $request['date'];
+            $delivery->delivery_date = $data['date'];
             $delivery->client_id = $client->id;
             $delivery->save();
 
-            $checkAddressExits = Address::where('zip', $request['zipStart'])->where('number', $request['numberStart'])->first();
-            $checkAddress1Exits = Address::where('zip', $request['zipStart'])->where('number', $request['numberStart'])->first();
+            $checkAddressExits = Address::where('zip', $data['zipStart'])->where('number', $data['numberStart'])->first();
+            $checkAddress1Exits = Address::where('zip', $data['zipStart'])->where('number', $data['numberStart'])->first();
 
             if(empty($checkAddressExits)) {
                 $addressStart = new Address();
-                $addressStart->zip = $request['zipStart'];
-                $addressStart->number = $request['numberStart'];
+                $addressStart->zip = $data['zipStart'];
+                $addressStart->number = $data['numberStart'];
                 $addressStart->save();
                 $addressStart = $addressStart->id;
             }
@@ -119,8 +120,8 @@ class DeliveryController extends Controller
 
             if(empty($checkAddress1Exits)) {
                 $addressEnd = new Address();
-                $addressEnd->zip = $request['zipEnd'];
-                $addressEnd->number = $request['numberEnd'];
+                $addressEnd->zip = $data['zipEnd'];
+                $addressEnd->number = $data['numberEnd'];
                 $addressEnd->save();
                 $addressEnd = $addressEnd->id;
             }
