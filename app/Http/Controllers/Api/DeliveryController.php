@@ -74,8 +74,12 @@ class DeliveryController extends Controller
      */
     public function save(Request $request)
     {
+        $data = json_decode($request->payload, true);
 
-        $validatedData =  Validator::make($request->all(), [
+        if(!$data)
+            return response()->json(['errors' => 'format_invalid'], 404);
+
+        $validatedData =  Validator::make($data, [
             'nameClient' => 'required',
             'date' => 'required|date|date_format:Y-m-d',
             'zipStart' => 'required|integer',
