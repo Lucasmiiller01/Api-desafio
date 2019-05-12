@@ -14,8 +14,9 @@
 
 
 
-Route::middleware(['auth:api', 'cors'])->namespace('Api')->group(function () {
+Route::middleware(['auth:api'])->namespace('Api')->group(function () {
 
     Route::get('delivery/find/{id}', 'DeliveryController@find')->name('find.delivery');
     Route::get('delivery/all', 'DeliveryController@getAll')->name('all.delivery');
+    Route::post('delivery/save', 'DeliveryController@save')->name('save.delivery');
 });
