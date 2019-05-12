@@ -86,10 +86,10 @@ class DeliveryController extends Controller
         $validatedData =  Validator::make($data, [
             'nameClient' => 'required',
             'date' => 'required|date|date_format:Y-m-d',
-            'zipStart' => 'required|integer',
-            'numberStart' => 'required|integer',
-            'zipEnd' => 'required|integer',
-            'numberEnd' => 'required|integer'
+            'zipStart' => 'required',
+            'numberStart' => 'required',
+            'zipEnd' => 'required',
+            'numberEnd' => 'required'
         ]);
 
         if (count($validatedData->errors()) == 0) {
