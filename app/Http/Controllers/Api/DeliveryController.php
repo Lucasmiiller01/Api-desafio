@@ -37,9 +37,12 @@ class DeliveryController extends Controller
             if(!empty($delivery)) {
                 $delivery->Client;
                 $delivery->Addresses;
+                foreach ($delivery->Addresses as &$address) {
+                    $address->complent = $this->cep($address->zip) !== false ? $this->cep($address->zip) : null;
+                }
             }
             else
-                return  response()->json(['error' => 'delivery_not_found'], 404);
+                return response()->json(['error' => 'delivery_not_found'], 404);
 
             return response()->json(['deliverys' => $delivery], 200);
         }
@@ -142,5 +145,23 @@ class DeliveryController extends Controller
 
         return response()->json(['error' => $validatedData->errors()], 404);
 
+    }
+
+    public function cep($cep)
+    {
+        if(isset($cep) && !empty($cep)) {
+            $client = new \GuzzleHttp\Client();
+            $response = $client->request('GET', 'https://viacep.com.br/ws/'. $cep . '/json/');
+            if($response->getStatusCode() == 200) {
+                $response = json_decode($response->getBody()->getContents(),true);
+                return response()->json($response);
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
 }
